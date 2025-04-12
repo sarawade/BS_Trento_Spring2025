@@ -36,6 +36,30 @@ References:
 References:
 - [Owen (2013), Chp 9](https://artowen.su.domains/mc/Ch-var-is.pdf)
 
+**Lecture 4: Sample Size Required** April 14, 2025
+- Sample size required for IS
+- Sample size required for SNIS
+
+References:
+- [Chaterjee and Diaconis (2018)](https://arxiv.org/abs/1511.01437)
+
+**Lecture 5: Gaussian Processes** April 15, 2025
+- Bayesian nonparametric regression
+- Gaussian process (GP) priors
+  - covariance functions
+- Computational challenges in GP regression
+- Mixtures of GP experts for scalable inference
+- SNIS for Mixtures of GP expert
+
+References:
+- [Zhang and Williamson (2019)](https://arxiv.org/abs/1702.08420)
+
+For further references and introductions to Gaussian processes:
+- [Owen (2013), Chp 6.3](https://artowen.su.domains/mc/Ch-processes.pdf)
+- [Orbanz (2014), Chp 4](http://www.gatsby.ucl.ac.uk/~porbanz/papers/porbanz_BNP_draft.pdf)
+- [Rasmussen and Williams (2006)](https://gaussianprocess.org/gpml/)
+- [Ghoshal and Van der Vaart (2017)](https://www.cambridge.org/core/books/fundamentals-of-nonparametric-bayesian-inference/C96325101025D308C9F31F4470DEA2E8)
+
 ## Homeworks and Oral Exam
 
 A set of homeworks will be released. You will be required to submit all homeworks by email (sara.wade@ed.ac.uk) before the exam dates. During the oral exam, you will be asked to present and answer questions on of the homeworks. Date of the exams TBA.
