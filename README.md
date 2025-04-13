@@ -45,7 +45,7 @@ References:
 
 **Lecture 5: Gaussian Processes** April 15, 2025
 - Bayesian nonparametric regression
-- Gaussian process (GP) priors
+- Gaussian process (GP) priors (see code provided)
   - covariance functions
 - Computational challenges in GP regression
 - Mixtures of GP experts for scalable inference
