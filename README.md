@@ -82,3 +82,5 @@ References:
 ## Homeworks and Oral Exam
 
 A set of homeworks will be released. You will be required to submit all homeworks by email (sara.wade@ed.ac.uk) before the exam dates. During the oral exam, you will be asked to present and answer questions on of the homeworks. Date of the exams TBA.
+
+- [Homework 1](https://htmlpreview.github.io/?https://github.com/sarawade/BS_Trento_Spring2025/blob/main/homeworks/hw1.html): Released April 16, 2025. **Due April 30. 2025**
