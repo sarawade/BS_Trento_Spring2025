@@ -45,7 +45,7 @@ References:
 
 **Lecture 5: Gaussian Processes** April 15, 2025
 - Bayesian nonparametric regression
-- Gaussian process (GP) priors
+- Gaussian process (GP) priors (see code provided)
   - covariance functions
 - Computational challenges in GP regression
 - Mixtures of GP experts for scalable inference
@@ -59,6 +59,25 @@ For further references and introductions to Gaussian processes:
 - [Orbanz (2014), Chp 4](http://www.gatsby.ucl.ac.uk/~porbanz/papers/porbanz_BNP_draft.pdf)
 - [Rasmussen and Williams (2006)](https://gaussianprocess.org/gpml/)
 - [Ghoshal and Van der Vaart (2017)](https://www.cambridge.org/core/books/fundamentals-of-nonparametric-bayesian-inference/C96325101025D308C9F31F4470DEA2E8)
+
+**Lecture 6: Modal and Laplace Approximations** April 17, 2025
+- Maximum a posterior estimators (MAP)
+  - Bayesian Ridge example
+  - Conditional maximization/coordinate ascent
+  - Numerical techniques
+- Laplace approximations 
+  - Gaussian approximations
+  - Mixtures of Gaussian approximations
+  - Example: Laplace approximation for GP classification
+ 
+References:
+- [Bayesian Data Analysis (2021)](https://sites.stat.columbia.edu/gelman/book/BDA3.pdf)
+  - Chp 4 on Asymptotics and Connections to non-Bayesian approaches
+  - Chp 13 on Model and Distributional Approximations
+- [Introduction to Statistical Learning (2021)](https://www.statlearning.com)
+  - Chp 6.4 on Shrinkage Methods (including Ridge, Bayesian Ridge)
+- [Gaussian Processes for Machine Learning (2006)](https://gaussianprocess.org/gpml/)
+  - Chp 3.4 on Laplace Approximation for GP classification
 
 ## Homeworks and Oral Exam
 
