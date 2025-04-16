@@ -49,7 +49,7 @@ References:
   - covariance functions
 - Computational challenges in GP regression
 - Mixtures of GP experts for scalable inference
-- SNIS for Mixtures of GP expert
+- SNIS for Mixtures of GP experts
 
 References:
 - [Zhang and Williamson (2019)](https://arxiv.org/abs/1702.08420)
@@ -58,7 +58,7 @@ For further references and introductions to Gaussian processes:
 - [Owen (2013), Chp 6.3](https://artowen.su.domains/mc/Ch-processes.pdf)
 - [Orbanz (2014), Chp 4](http://www.gatsby.ucl.ac.uk/~porbanz/papers/porbanz_BNP_draft.pdf)
 - [Rasmussen and Williams (2006)](https://gaussianprocess.org/gpml/)
-- [Ghoshal and Van der Vaart (2017)](https://www.cambridge.org/core/books/fundamentals-of-nonparametric-bayesian-inference/C96325101025D308C9F31F4470DEA2E8)
+- [Ghoshal and Van der Vaart (2017), Chp 11](https://www.cambridge.org/core/books/fundamentals-of-nonparametric-bayesian-inference/C96325101025D308C9F31F4470DEA2E8)
 
 **Lecture 6: Modal and Laplace Approximations** April 17, 2025
 - Maximum a posterior estimators (MAP)
