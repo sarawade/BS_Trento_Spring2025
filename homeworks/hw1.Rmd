@@ -1,0 +1,96 @@
+---
+title: "Homework 1 - Bayesian Statistics 2025"
+author: "Claudio Agostinelli, Department of Mathematics, University of Trento, Italy"  
+date: "16 April 2025"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Exercise 1
+A Linear Congruential Generator (LCG) is given by
+$$ 
+\begin{align*}  
+x_i & = a_0 + a_1 x_{i-1} \mod M \\
+u_i & = x_i / M
+\end{align*}   
+$$  
+
+and when $a_0=0$ yields the Multiplicative Congruential Generator (MCG). [Marsaglia (1968)](https://www.jstor.org/stable/58853?seq=1) showed that the consecutive tuples $(u_i, \ldots, u_{i+k-1})$ from an MCG have a lattice structure. The figure below shows some examples for $k=2$, using $M$ small enough for us to see the structure
+
+```{r echo=FALSE}
+MCG <- function(n, seed=1, a=33, M=59) {
+  r <- rep(0, n+1)
+  r[1] <- seed 
+  for (i in 2:(n+1)) {
+    r[i] <- (a*r[i-1])%%M
+  }
+  r <- r[-1]/M
+  return(r)
+}
+par(mfcol=c(1,2))
+x <- MCG(n=59, a=33, M=59)      
+plot(x[-59], x[-1], xlab=expression(x[t]), ylab=expression(x[t+1]), main="a=33, M=59")
+x <- MCG(n=59, a=44, M=59)      
+plot(x[-59], x[-1], xlab=expression(x[t]), ylab=expression(x[t+1]), main="a=44, M=59")
+```
+
+```{r eval=FALSE, echo=FALSE}  
+x <- MCG(n=59, a=59, M=59)      
+plot(x[-59], x[-1], xlab=expression(x[t]), ylab=expression(x[t+1]), main="a=59, M=59")
+x <- MCG(n=59, a=1, M=59)      
+plot(x[-59], x[-1], xlab=expression(x[t]), ylab=expression(x[t+1]), main="a=1, M=59")
+```
+
+A lattice is an infinite set of the form
+
+$$
+  \mathcal{L} = \left\{ \sum_{j=1}^k \alpha_j v_j | \alpha_j \in \mathbb{Z} \right\} \ ,
+$$
+  
+where $v_j$ are linearly independent basis vectors in $\mathbb{R}^k$. The tuples from the MCG are the intersection of the infinite set $\mathcal{L}$ with the unit cube $[0,1)^k$. 
+
+The lattice points in $k$ dimensions lie within sets of parallel $k-1$ dimensional planes. Lattices where those planes are far apart miss much of the space, and so are poor approximations to the desired uniform distribution. For an MCG with period $P$, [Marsaglia (1968)](https://www.jstor.org/stable/58853?seq=1) shows that there is always a system of $(k!P )^{1/k}$ or fewer parallel planes that contain all of the $k$-tuples.
+
+- For each of the two MCG described above:
+  - Redo the figures above.
+  - Find one basis $v$ and report it in the figure.
+  - Find the distance among the parallel lines.
+- The lattice on the right of the figure above is not the worst one for $M=59$.   
+  - Find another value of $a$ for which the period of $x_i = a x_{i-1} \mod 59$, starting with $x_1=1$ equals $59$, but the 59 points $u_i, u_{i+1}$ for $u_i = x_i/59$ lie on parallel lines more widely separated than those with $a=44$.
+  - Plot the points and compute the separation between those lines;
+  - Hint: identify a lattice point on one of the lines, and drop a perpendicular from it to a line defined by two points on another of the lines.
+
+# Exercise 2
+
+Suppose that we are using an MCG with period $P \le 2^{32}$.
+
+- Evaluate Marsaglia's upper bound on the number of planes which will contain all consecutive $k = 10$ tuples from the MCG.  
+- Repeat the previous part, but assume now a much larger bound $P \le 2^{64}$.
+- Repeat the previous two parts for $k = 20$ and again for $k = 100$.
+- Hint: Read carefully the previous exercise!
+
+# Exercise 3
+
+Suppose that an MCG becomes available with period $2^{19937} - 1$. What is Marsaglia's upper bound on the number of planes in $[0, 1)^{10}$ that will contain all $10$-tuples from such a generator?     
+  
+# Exercise 4
+  
+A relatively new and quite different generator type is the Inversive Congruential Generator, ICG. For a prime number $M$ the ICG update is
+
+$$ 
+x_i = 
+    \begin{cases}
+  a_0 + a_1 x_{i-1}^{-1} \mod M & \qquad x_{i-1} \neq 0 \ , \\
+  a_0 & \qquad x_{i-1} = 0 \ .
+  \end{cases} 
+  $$    
+    
+When $x \neq 0$, then $x^{-1}$ is the unique number in $\{0, 1, \ldots, M -1 \}$ with $x x^{-1} = 1 \mod M$. The ICG behaves as if it uses the convention $0^{-1} = 0$. These methods produce a sequence of integer values $x_i \in \{0, 1, \ldots, M - 1 \}$, that is, integers modulo $M$. With good choices for the constants $a_j$ and $M$, the $x_i$ can simulate independent random integers modulo $M$. See also the wikipedia page [en.wikipedia.org/wiki/Inversive_congruential_generator](https://en.wikipedia.org/wiki/Inversive_congruential_generator).
+  
+  Consider the ICG for $M=59$, $a_0=1$ and $a_1 = 17$.
+  
+  - What is the period of this generator?
+  - Plot the consecutive pairs $(u_i, u_{i+1})$ where $u_i = x_i/59$.
