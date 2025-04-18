@@ -1,0 +1,58 @@
+---
+title: "Homework 2 - Bayesian Statistics 2025"
+author: "Sara Wade, School of Mathematics, University of Edinburgh, UK"  
+date: "18 April 2025"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(tidyverse)
+```
+
+# Exercise 1
+
+Consider a Gaussian process regression model with zero-mean function and covariance function $k(x,x')$:
+$$ 
+\begin{align*}  
+Y_i \mid x_i, f & = \text{N}(f(x_i),\sigma^2) \\
+f &\sim GP(0,k)
+\end{align*}   
+$$  
+Recall the Matern covariance function has the form
+$$
+k(x,x') = \sigma^2_0 \frac{2^{1-\nu}}{\Gamma(\nu)} \left( \frac{\sqrt{2\nu}}{\ell} |x-x'|\right)^\nu \mathcal{K}_\nu\left( \frac{\sqrt{2\nu}}{\ell} |x-x'|\right)
+$$
+
+- Simulate draws from the GP prior with a Matern covariance for different choices of  $\nu$, and comment on the effect of $\nu$.
+- Generate some toy data assuming 
+$$Y_i \mid x_i = \text{N}(\exp(x_i/5)\sin(2x_i),\sigma^2), $$ 
+for $n=50$ and $\sigma^2= 0.16$. Fit a the GP regression model with $\sigma^2$ fixed to the true value and the magnitude equal to 1 and plot the posterior mean with pointwise CI and posterior samples of the function. Consider different choices for the length-scale and smoothness parameters and comment on how the results change.
+- Find the noise variance $\sigma^2$, length-scale, and magnitude (with a fixed $\nu$ - your choice) by maximizing the marginal likelihood. Plot the posterior mean of the function with pointwise CIs and posterior samples of the function.
+- Now, repeat this, but by maximizing the marginal posterior (with the function marginalized) and $\text{Gam}(2,b)$ priors on the square root of the noise variance, length scale, and square root of magnitude (for your choice of $b$). Plot the posterior mean of the function with pointwise CIs and posterior samples of the function. Comment on the changes (if any).
+- Next, draw samples from the Laplace approximation of the posterior of the noise variance $\sigma^2$, length-scale, and magnitude. Compute importance weights for these samples, and resample these samples based on the importance weights (called Sampling Importance Resampling (SIR)) to produce samples from the posterior. Compare the samples from the laplace approximation and posterior through histograms and scatter plots. Comment on the results.
+- Lastly, compute the predicted regression function for a grid of values by 1) plugging in the MAP estimates of the noise variance $\sigma^2$, length-scale, and magnitude or 2) compute IS that integrates with respect to the posterior of these parameters. How do they compare?
+
+
+
+# Exercise 2 
+
+Consider the following data. For simplicity, let's focus on modelling the number of bike rentals over time.
+
+```{r}
+# Load data
+bike = read.csv('day.csv')
+
+# Focus on number of bike rentals as a function of time
+y = bike$cnt
+n = length(y)
+x = c(1:n)
+
+ggplot() +
+  geom_point(aes(x,y)) +
+  theme_bw()
+```
+
+- Fit a GP regression model to the data. Use a kernel function of your choice, and estimate the parameters of the model using a strategy of your choice.
+- Plot the posterior mean of the function with pointwise CIs, and posterior samples of the function. 
