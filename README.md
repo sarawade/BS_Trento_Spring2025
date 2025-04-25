@@ -97,7 +97,20 @@ Further references on probabilistic programming:
 - [NIMBLE](https://r-nimble.org): see website for introduction, examples, and documentation
 - [Stan](https://mc-stan.org): see website for introduction, examples, and documentation, and [rstan](https://mc-stan.org/rstan/) for the R interface.
 - [Turing.jl](https://turinglang.org): in Julia
-- [NumPyro](https://num.pyro.ai/en/latest/index.html#introductory-tutorials): in Python 
+- [NumPyro](https://num.pyro.ai/en/latest/index.html#introductory-tutorials): in Python
+
+**Lecture 8: Metropolis-Hastings (MH)** April 29, 2025 (online, zoom link circulated in telegram)
+- Intro to Metropolis-Hastings
+- Independence Sampler
+- Random Walk
+  - Example: Gaussian process regression
+  - Adaptive Random Walk
+ 
+References:
+- [Owen (2013), Chp 11](https://artowen.su.domains/mc/Ch-MCMC.pdf)
+- [Bayesian Data Analysis (2021), Chp 11 on Basics of Markov Chain Simulation](https://sites.stat.columbia.edu/gelman/book/BDA3.pdf)
+- [Griffin and Stephens (2013), Advances in MCMC](https://academic.oup.com/book/12043/chapter/161359578), Section 7.4 on Adaptive MCMC
+
 
 ## Homeworks and Oral Exam
 
