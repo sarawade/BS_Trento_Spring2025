@@ -103,8 +103,9 @@ Further references on probabilistic programming:
 - Intro to Metropolis-Hastings
 - Independence Sampler
 - Random Walk
-  - Example: Gaussian process regression
-  - Adaptive Random Walk
+  - Example: Logistic Regression
+- Diagonistics
+- Adaptive Random Walk
  
 References:
 - [Owen (2013), Chp 11](https://artowen.su.domains/mc/Ch-MCMC.pdf)
