@@ -104,7 +104,7 @@ Further references on probabilistic programming:
 - Independence Sampler
 - Random Walk
   - Example: Logistic Regression
-- Diagonistics
+- Diagnostics
 - Adaptive Random Walk
  
 References:
