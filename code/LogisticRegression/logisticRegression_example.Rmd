@@ -1,0 +1,171 @@
+---
+title: "Logistic Regression - Random Walk MH"
+author: "Sara Wade"
+date: "2025-04-27"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(coda)
+library(mvtnorm)
+source("logreg_rw_MH.R")
+```
+
+## Generate Data
+
+Let's start by generating some toy data, with the true coefficients known.
+
+```{r}
+# Generate some data
+set.seed(1101)
+n = 200
+p=1
+x = runif(n,-2, 2)
+X = cbind(rep(1,n), x)
+beta_true = matrix(c(0.5,2),2,1)
+p_true = 1/(1+exp(-X%*%beta_true))
+ggplot()+
+  geom_line(aes(x,p_true)) +
+  theme_bw() +
+  labs(y="p(y=1|x)")
+y = rbinom(n, size=1, p_true)
+```
+
+## Bayesian Logistic Regression
+
+We will consider a logistic regression model:
+
+$$
+\begin{align*}
+p( Y_i=1 \mid x_i, \beta) = \frac{1}{1+\exp(-\beta^Tx_i)} 
+\end{align*}
+$$ 
+with a normal on the coefficients: 
+$$
+\beta \sim \text{N}(\beta_0, \Sigma_0)
+$$
+
+Let's fix the parameters of the prior and create a list to store the values (you can later try changing these to see the effect on the posterior).
+
+```{r}
+beta0 = matrix(c(0,0),p+1,1)
+Sigma0 = 100*diag(p+1)
+prior.list = list(beta0 = beta0, Sigma0= Sigma0)
+```
+
+## Random-Walk Metropolis-Hastings
+
+We start by setting the parameters of the MCMC algorithm
+
+```{r}
+# RW MH parameters
+M = 1000
+burnin = 0
+thin = 1
+rw_var = 1*diag(p+1)
+mcmc.list = list(M=M, burnin = burnin, thin=thin, rw_var = rw_var)
+# Initial parameter values
+beta.init = matrix(c(-2,-2),2,1)
+```
+
+Run the random walk MH algorithm.
+
+```{r}
+output = logreg_rw_MH(X, y, mcmc.list, prior.list, beta.init)
+```
+
+Let's plot the values
+
+```{r}
+# Scatter plot
+ggplot() +
+  geom_point(aes(x=output$param.mat[,1],y=output$param.mat[,2])) +
+  geom_point(aes(x=beta_true[1],y=beta_true[2]), color='red') +
+  theme_bw() +
+  labs(x='beta_0','beta_1')
+
+# Trace plots
+plot(as.mcmc(output$param.mat), ask = FALSE)
+
+# Plot acceptance probability
+ggplot() +
+  geom_point(aes(x=c(1:M), y = output$avg.accep)) +
+  labs(x='iteration',y='average acceptance')
+
+# Plot sq jump distance
+ggplot() +
+  geom_point(aes(x=c(1:M), y = output$sq.jump.dist))+
+  labs(x='iteration',y='average sq jump distance')
+```
+
+We observe that an initial burnin period is required, but the chain seems to converge to the posterior distribution relatively quickly (e.g. burnin even less than 50 seems to be sufficient). The trace plots reveal a step like behavior with suggest some stickiness of the chain.
+
+### Changing the variance of the random walk
+
+Notice how the acceptance probability is converging to around 0.1, which is a bit low, and the average squared jump distance is converging to around 0.04. If we change the RW variance how does this effect?
+
+Let's start with an very small value of the RW variance.
+
+```{r}
+rw_var = 0.01*diag(p+1)
+mcmc.list = list(M=M, burnin = burnin, thin=thin, rw_var = rw_var)
+output = logreg_rw_MH(X, y, mcmc.list, prior.list, beta.init)
+
+# Scatter plot
+ggplot() +
+  geom_point(aes(x=output$param.mat[,1],y=output$param.mat[,2])) +
+  geom_point(aes(x=beta_true[1],y=beta_true[2]), color='red') +
+  theme_bw() +
+  labs(x='beta_0','beta_1')
+
+# Trace plots
+plot(as.mcmc(output$param.mat), ask = FALSE)
+
+# Plot acceptance probability
+ggplot() +
+  geom_point(aes(x=c(1:M), y = output$avg.accep)) +
+  labs(x='iteration',y='average acceptance')
+
+# Plot sq jump distance
+ggplot() +
+  geom_point(aes(x=c(1:M), y = output$sq.jump.dist))+
+  labs(x='iteration',y='average sq jump distance')
+```
+
+In this case, the chain takes longer to converge to the posterior, and the average acceptance probability is now quite high (converging to around 0.75) but the average squared jump distance is lower.
+
+### Adjusting the variance based on an intial run
+
+Secondly, choosing RW variance to be $(2.4)^2/p$ times the covariance of the target density, where $p$ is the dimension of the target (i.e. number of model parameters), has been shown to be optimal asymptotically in $p$ ([Roberts et al (1997)](https://academic.oup.com/book/54042/chapter/422210114), [Roberts and Rosenthal (2001)](https://projecteuclid.org/journals/statistical-science/volume-16/issue-4/Optimal-scaling-for-various-Metropolis-Hastings-algorithms/10.1214/ss/1015346320.full)), and [Gelman et al (1996)](https://projecteuclid.org/journals/annals-of-applied-probability/volume-7/issue-1/Weak-convergence-and-optimal-scaling-of-random-walk-Metropolis-algorithms/10.1214/aoap/1034625254.full) showed that these results can also be useful in low-dimensional problems.
+
+Based on this, let's use the previous run to get an initial estimate of the target covariance matrix to set the RW variance.
+
+```{r}
+rw_var = 2.4^2/(p+1)*var(output$param.mat[200:1000,])
+mcmc.list = list(M=M, burnin = burnin, thin=thin, rw_var = rw_var)
+output = logreg_rw_MH(X, y, mcmc.list, prior.list, beta.init)
+
+# Scatter plot
+ggplot() +
+  geom_point(aes(x=output$param.mat[,1],y=output$param.mat[,2])) +
+  geom_point(aes(x=beta_true[1],y=beta_true[2]), color='red') +
+  theme_bw() +
+  labs(x='beta_0','beta_1')
+
+# Trace plots
+plot(as.mcmc(output$param.mat), ask = FALSE)
+
+# Plot acceptance probability
+ggplot() +
+  geom_point(aes(x=c(1:M), y = output$avg.accep)) +
+  labs(x='iteration',y='average acceptance')
+
+# Plot sq jump distance
+ggplot() +
+  geom_point(aes(x=c(1:M), y = output$sq.jump.dist))+
+  labs(x='iteration',y='average sq jump distance')
+```
+
+In this case, we have the highest average squared jump distance of around 0.6 and an average acceptance probability of around 0.4.
