@@ -78,6 +78,40 @@ References:
   - Chp 6.4 on Shrinkage Methods (including Ridge, Bayesian Ridge)
 - [Gaussian Processes for Machine Learning (2006)](https://gaussianprocess.org/gpml/)
   - Chp 3.4 on Laplace Approximation for GP classification
+ 
+**Lecture 7: Intro to Markov Chain Monte Carlo (MCMC)** April 28, 2025 (online, zoom link circulated in telegram)
+- Intro to MCMC
+- Overview of probabilistic programming languages for MCMC
+- Review of Markov Chains
+  - Markov chains, transition kernels, and time homogenity
+  - Invariant distributions and ergodic Markov chains
+  - Ergodic Theorem for Markov chains, geometric ergodicity
+  - Detailed balance equations
+
+References:
+ - [Owen (2013), Chp 11](https://artowen.su.domains/mc/Ch-MCMC.pdf)
+ - [Bayesian Data Analysis (2021), Chp 11 on Basics of Markov Chain Simulation](https://sites.stat.columbia.edu/gelman/book/BDA3.pdf)
+
+Further references on probabilistic programming:
+- JAGS: [Ross (2022), Chp 10.1 Intro to JAGS](https://bookdown.org/kevin_davisross/bayesian-reasoning-and-methods/introduction-to-jags.html), [rjags](https://cran.r-project.org/web/packages/rjags/rjags.pdf)
+- [NIMBLE](https://r-nimble.org): see website for introduction, examples, and documentation
+- [Stan](https://mc-stan.org): see website for introduction, examples, and documentation, and [rstan](https://mc-stan.org/rstan/) for the R interface.
+- [Turing.jl](https://turinglang.org): in Julia
+- [NumPyro](https://num.pyro.ai/en/latest/index.html#introductory-tutorials): in Python
+
+**Lecture 8: Metropolis-Hastings (MH)** April 29, 2025 (online, zoom link circulated in telegram)
+- Intro to Metropolis-Hastings
+- Independence Sampler
+- Random Walk
+  - Example: Logistic Regression
+- Diagonistics
+- Adaptive Random Walk
+ 
+References:
+- [Owen (2013), Chp 11](https://artowen.su.domains/mc/Ch-MCMC.pdf)
+- [Bayesian Data Analysis (2021), Chp 11 on Basics of Markov Chain Simulation](https://sites.stat.columbia.edu/gelman/book/BDA3.pdf)
+- [Griffin and Stephens (2013), Advances in MCMC](https://academic.oup.com/book/12043/chapter/161359578), Section 7.4 on Adaptive MCMC
+
 
 ## Homeworks and Oral Exam
 
