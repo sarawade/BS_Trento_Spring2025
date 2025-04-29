@@ -110,7 +110,6 @@ Further references on probabilistic programming:
 References:
 - [Owen (2013), Chp 11](https://artowen.su.domains/mc/Ch-MCMC.pdf)
 - [Bayesian Data Analysis (2021), Chp 11 on Basics of Markov Chain Simulation](https://sites.stat.columbia.edu/gelman/book/BDA3.pdf)
-- [Griffin and Stephens (2013), Advances in MCMC](https://academic.oup.com/book/12043/chapter/161359578), Section 7.4 on Adaptive MCMC
 
 **Lecture 9: Metropolis-Hastings (MH)** May 5, 2025 (only 1 hr!, online, zoom link circulated in telegram)
 - MCMC error
