@@ -79,7 +79,7 @@ References:
 - [Gaussian Processes for Machine Learning (2006)](https://gaussianprocess.org/gpml/)
   - Chp 3.4 on Laplace Approximation for GP classification
  
-**Lecture 7: Intro to Markov Chain Monte Carlo (MCMC)** April 28, 2025 (online, zoom link circulated in telegram)
+**Lecture 7: Intro to Markov Chain Monte Carlo (MCMC)** April 28, 2025 (online, [recording](https://ed-ac-uk.zoom.us/rec/share/8ukLSvdKRJiIWSWAAqI605zwU5BPJZPdyUUdXoffHQW3F7XM0riQ-pCU4759nf74.9vHNGXqI4t8YILQz))
 - Intro to MCMC
 - Overview of probabilistic programming languages for MCMC
 - Review of Markov Chains
@@ -99,20 +99,21 @@ Further references on probabilistic programming:
 - [Turing.jl](https://turinglang.org): in Julia
 - [NumPyro](https://num.pyro.ai/en/latest/index.html#introductory-tutorials): in Python
 
-**Lecture 8: Metropolis-Hastings (MH)** April 29, 2025 (online, zoom link circulated in telegram)
+**Lecture 8: Metropolis-Hastings (MH)** April 29, 2025 (online, [recording](https://ed-ac-uk.zoom.us/rec/share/xvo4pcaGkn6LiuEmd1v0QdJ33hn_jVegzcUgkmsdS72Gxa4QpnTD-dTtQaj7P4N5.nP8vvKjnJbhjS788))
 - Intro to Metropolis-Hastings
 - Independence Sampler
 - Random Walk
   - Example: Logistic Regression
-- Burn-in
-- Diagnostics (trace plots, ACF, Gelman diagnostic, effective sample size, average sqaured jump distance)
  
 References:
 - [Owen (2013), Chp 11](https://artowen.su.domains/mc/Ch-MCMC.pdf)
 - [Bayesian Data Analysis (2021), Chp 11 on Basics of Markov Chain Simulation](https://sites.stat.columbia.edu/gelman/book/BDA3.pdf)
 
 **Lecture 9: Metropolis-Hastings (MH)** May 5, 2025 (only 1 hr!, online, zoom link circulated in telegram)
+- Burn-in
+- Diagnostics (trace plots, ACF, Gelman diagnostic, effective sample size, average sqaured jump distance)
 - MCMC error
+- Thinning
 - Adaptive Random Walk
 
 References:
