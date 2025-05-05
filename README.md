@@ -109,16 +109,29 @@ References:
 - [Owen (2013), Chp 11](https://artowen.su.domains/mc/Ch-MCMC.pdf)
 - [Bayesian Data Analysis (2021), Chp 11 on Basics of Markov Chain Simulation](https://sites.stat.columbia.edu/gelman/book/BDA3.pdf)
 
-**Lecture 9: Metropolis-Hastings (MH)** May 5, 2025 (only 1 hr!, online, zoom link circulated in telegram)
+**Lecture 9: MCMC Diagnostics (MH)** May 5, 2025 (only 1 hr!, online, zoom link circulated in telegram)
 - Burn-in
-- Diagnostics (trace plots, ACF, Gelman diagnostic, effective sample size, average sqaured jump distance)
+- Diagnostics (trace plots, ACF, Gelman diagnostic, effective sample size, average squared jump distance)
 - MCMC error
-- Thinning
-- Adaptive Random Walk
 
 References:
 - [Owen (2013), Chp 11](https://artowen.su.domains/mc/Ch-MCMC.pdf)
+- [coda R package](https://cran.r-project.org/web/packages/coda/coda.pdf)
+
+**Lecture 10: Adaptive Metropolis-Hastings and Gibbs sampling** May 6, 2025 (online, zoom link circulated in telegram)
+- Thinning (diagnositics continued)
+- Adaptive random walk
+- Gibbs sampling:
+  - Systematic vs Random scan
+  - Correlated components in Gibbs sampling
+  - Blocked and Collapsed Gibbs sampling
+  - Example: Probit Regression (data augmentation + blocked Gibbs)
+  - Slice Sampling (data augmentation + Gibbs) 
+  - Example: Truncated normal (slice sampling)
+
+References:
 - [Griffin and Stephens (2013), Advances in MCMC](https://academic.oup.com/book/12043/chapter/161359578), Section 7.4 on Adaptive MCMC
+- [Owen (2013), Chp 12](https://artowen.su.domains/mc/Ch-MCMC.pdf)
 
 ## Homeworks and Oral Exam
 
