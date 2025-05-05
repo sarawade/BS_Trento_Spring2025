@@ -109,10 +109,11 @@ References:
 - [Owen (2013), Chp 11](https://artowen.su.domains/mc/Ch-MCMC.pdf)
 - [Bayesian Data Analysis (2021), Chp 11 on Basics of Markov Chain Simulation](https://sites.stat.columbia.edu/gelman/book/BDA3.pdf)
 
-**Lecture 9: MCMC Diagnostics (MH)** May 5, 2025 (only 1 hr!, online, zoom link circulated in telegram)
+**Lecture 9: MCMC Diagnostics (MH)** May 5, 2025 (only 1 hr!, online, [recording](https://ed-ac-uk.zoom.us/rec/share/herAGmW0fy8bmiZxh2rm2su0S04qDlS6CDiPYvHpJenMWU5ZB2QH7CgXmXD7FdN8.BGao9eGt7dRkg8cs
+Passcode: Bayes2025!))
 - Burn-in
 - Diagnostics (trace plots, ACF, Gelman diagnostic, effective sample size, average squared jump distance)
-- MCMC error
+- MCMC error, batch estimate
 
 References:
 - [Owen (2013), Chp 11](https://artowen.su.domains/mc/Ch-MCMC.pdf)
