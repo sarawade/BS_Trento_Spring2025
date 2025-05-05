@@ -122,10 +122,12 @@ References:
 
 ## Homeworks and Oral Exam
 
-A set of homeworks will be released. You will be required to submit all homeworks by email (sara.wade@ed.ac.uk) by **June 1, 2025**. Include both the Rmd and html files for all homeworks (along with any other necessary files) together in one zip file. During the oral exam, you will be asked to present and answer questions on of the homeworks.
+A set of homeworks will be released. You will be required to submit all homeworks by email (sara.wade@ed.ac.uk) by **June 1, 2025**. Include both the Rmd and html files for all homeworks (along with any other necessary files) together in one zip file. During the oral exam, you will be asked to present and answer questions on of the homeworks. The oral exam will be held online on zoom. The link to sign up for a 30min time block will be circulated closer to the date. You should bring a writing tablet and will be asked to have your video on and show a copy of your student ID at the start of the exam. Please email me if you do not have access to a writing tablet.
 
 - [Homework 1](https://htmlpreview.github.io/?https://github.com/sarawade/BS_Trento_Spring2025/blob/main/homeworks/hw1.html): Released April 16, 2025.
 - [Homework 2](https://htmlpreview.github.io/?https://github.com/sarawade/BS_Trento_Spring2025/blob/main/homeworks/hw2.html): Released April 18, 2025.
+- Homework 3: TBA
+- Homework 4: TBA
 
 **EXAM Dates**
 June 17,2025
