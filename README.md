@@ -118,7 +118,7 @@ References:
 - [Owen (2013), Chp 11](https://artowen.su.domains/mc/Ch-MCMC.pdf)
 - [coda R package](https://cran.r-project.org/web/packages/coda/coda.pdf)
 
-**Lecture 10: Adaptive Metropolis-Hastings and Gibbs sampling** May 6, 2025 (online, zoom link circulated in telegram)
+**Lecture 10: Adaptive Metropolis-Hastings and Gibbs sampling** May 6, 2025 (online, [recording](https://ed-ac-uk.zoom.us/rec/share/UVonqG6NbBSPx3Z03hdkmxKdTyNDIYaA9H_fpHq8OAACFGebQOq1smJLHKfptNPz.ijlgC57glY-ieCo2))
 - Thinning (diagnositics continued)
 - Adaptive random walk
 - Gibbs sampling:
@@ -126,12 +126,20 @@ References:
   - Correlated components in Gibbs sampling
   - Blocked and Collapsed Gibbs sampling
   - Example: Probit Regression (data augmentation + blocked Gibbs)
-  - Slice Sampling (data augmentation + Gibbs) 
-  - Example: Truncated normal (slice sampling)
 
 References:
 - [Griffin and Stephens (2013), Advances in MCMC](https://academic.oup.com/book/12043/chapter/161359578), Section 7.4 on Adaptive MCMC
 - [Owen (2013), Chp 12](https://artowen.su.domains/mc/Ch-MCMC.pdf)
+
+**Lecture 11: Gibbs sampling** May 6, 2025 (online
+  - Slice Sampling (data augmentation + Gibbs) 
+     - Example: Truncated normal (slice sampling)
+  - Bayesian Lasso (data augmentation + Gibbs)
+  - Mixture models (data augmentation + Gibbs)
+
+References:
+- [Owen (2013), Chp 12](https://artowen.su.domains/mc/Ch-MCMC.pdf)
+- [Park and Casella (2012), The Bayesian Lasso](https://www.tandfonline.com/doi/abs/10.1198/016214508000000337)
 
 ## Homeworks and Oral Exam
 
