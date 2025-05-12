@@ -131,7 +131,7 @@ References:
 - [Griffin and Stephens (2013), Advances in MCMC](https://academic.oup.com/book/12043/chapter/161359578), Section 7.4 on Adaptive MCMC
 - [Owen (2013), Chp 12](https://artowen.su.domains/mc/Ch-MCMC.pdf)
 
-**Lecture 11: Gibbs sampling** May 6, 2025 (online
+**Lecture 11: Gibbs sampling** May 6, 2025 (online, [recording](https://ed-ac-uk.zoom.us/rec/share/PdRYFWkJpOSVHNsS6VXGd9cNJIh19aDXovxPgHDZeqMHxj-O1NC-IR9jeITQYPU.roxHx28NtDrswx1o))
   - Slice Sampling (data augmentation + Gibbs) 
      - Example: Truncated normal (slice sampling)
   - Bayesian Lasso (data augmentation + Gibbs)
