@@ -1,0 +1,142 @@
+---
+title: "Homework 3 - Bayesian Statistics 2025"
+author: "Claudio Agostinelli, University of Trento and Sara Wade, University of Edinburgh"  
+date: "12 May 2025"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(tidyverse)
+library(LearnBayes)
+```
+
+# Exercise 1: Mixture of exponential data
+
+Suppose a company obtains boxes of electronic parts from a particular supplier. It is known that $80\%$ of the lots are acceptable and the lifetimes of the "acceptable" parts follow an exponential distribution with mean $\lambda_A$. Unfortunately, $20\%$ of the lots are unacceptable and the lifetimes of the "bad" parts are exponential with mean $\lambda_B$, where $\lambda_A > \lambda_B$. Suppose $y_1, \ldots, y_n$, are the lifetimes of $n$ inspected parts that can come from either acceptable and unacceptable lots. The $y_i$s are a random sample from the mixture with density
+
+$$  
+p(y \vert  \lambda_A, \lambda_B) = p \frac{\exp(-y/\lambda_A)}{\lambda_A} + (1-p) \frac{\exp(-y/\lambda_B)}{\lambda_B} \ ,
+$$
+
+where $p=0.8$. Suppose $(\lambda_A, \lambda_B)$ are assigned the noninformative prior proportional to $1/(\lambda_A \ \lambda_B)$. The following function \texttt{log.exponential.mix} computes the log (unnormalized) posterior density of the transformed parameters $\theta = (\theta_A, \theta_B) = (\log \lambda_A, \log \lambda_B)$:
+
+```{r eval=FALSE}  
+log.exponential.mix <- function(theta, y) {
+  lambda.A <- exp(theta[1])
+  lambda.B <- exp(theta[2])  
+  sum(log(0.8*dexp(y,1/lambda.A)+(1-0.8)*dexp(y,1/lambda.B))) 
+}
+```
+    
+The following lifetimes are observed from a sample of $30$ parts:
+
+```{r}  
+y = c(0.98, 14.57, 0.08, 0.18, 86.49, 41.79, 0.29, 1.67, 7.08, 32.21, 18.51, 50.38, 36.70, 18.81, 14.89, 0.16, 0.72, 0.77, 10.39, 4.87, 18.64, 1.46, 2.69, 24.60, 39.93, 20.24, 8.69, 0.58, 2.58, 0.91)
+```
+
+
+- Construct a contour plot of the log unnormalized posterior as a function of  $(\theta_A, \theta_B)$ over the rectangle $(1,4) \times (-2,8)$
+- Using the function \texttt{optim} search for the posterior mode with a starting guess of $(\theta_A, \theta_B) = (3,0)$.
+- Search for the posterior mode with a starting guess $(\theta_A, \theta_B) = (2,4)$.
+- Explain why you obtain different estimates of the posterior mode in the previous two points.  
+- Next, consider the prior proportional to $1/(\lambda_A \ \lambda_B) 1(\lambda_A > \lambda_B)$, where $1(\lambda_A > \lambda_B)$ indicates if the constraint is satisfied. Redraw the contour plot of the log unnormalized density, highlighting the constrained region. 
+- Construct a random walk Metropolis chain for sampling the posterior of $\theta= (\log(\lambda_A), \log(\lambda_B))$. Run the chain for $10000$ iterations, construct density estimates for $\log(\lambda_A)$ and $\log(\lambda_B)$, and draw a scatterplot of the samples. Comment on convergence of the chain (burnin, mixing, thining, diagnositics) using tools in the `coda` package.
+- Construct a Gibbs sampling algorithm through data augmentation by introducing latent variables $z_i$ which indicate if the observation is from the acceptable or unacceptable component (i.e. either a systematic or random Gibbs sampler that cycles through sampling each $z_1, \ldots, z_n, \theta_A, \theta_B$ conditioned on all others). Also run the chain for $10000$ iterations construct density estimates for $\log(\lambda_A)$ and $\log(\lambda_B)$, and draw a scatterplot of the samples. Comment on convergence of the chain (burnin, mixing, thining, diagnositics) using tools in the `coda` package.
+
+
+# Exercise 2: Birthweight regression
+
+Dobson (2001) describes a birthweight regression study. One is interested in predicting a baby's birthweight (in grams) based on the gestational age (in weeks) and the gender of the baby. The data are available as `birthweight` in the `LearnBayes` R package. 
+
+```{r}
+#?birthweight
+head(birthweight)
+```
+
+In the standard linear regression model, we assume that
+
+$$
+BIRTHWEIGHT_i = \beta_0 + \beta_1 AGE_i + \beta_2 GENDER_i + \epsilon_i
+$$
+
+- Use the R function `lm` to fit this model by least-squares. From the output, assess if the effects `AGE` and `GENDER` are significant, and if they are significant, describe the effects of each covariate on `BIRTHWEIGHT`.
+- Suppose a noninformative [Zellner's g prior](https://en.wikipedia.org/wiki/G-prior) is placed on the regression parameter vector $\beta = (\beta_0,\beta_1,\beta_2)$ and assume an Inverse-Gamma prior for $\sigma^2$.
+- Simulate a sample of $5000$ draws from the joint posterior distribution of $(\beta,\sigma)$. Explore different values of the prior parameters. 
+- Use the function \texttt{blinreg} in package `LearnBayes` to redo the simulation and compare the results.
+- From the simulated samples, compute the posterior means and standard deviations of $\beta_1$ and $\beta_2$.
+- Check the consistency of the posterior means and standard deviations with the least-squares estimates and associated standard errors from the `lm` run.
+- Suppose one is interested in estimating the expected `birthweight` for `male` and `female` babies of gestational weeks `36` and `40`. From the simulated draws of the posterior distribution construct 90\% highest posterior density interval estimates for 36-week males, 36-week females, 40-week males, and 40-week females using the `HPDinterval` function in the `coda` package.
+- Compare the results you obtained with those you can have from function `blinregexpected`.
+- Suppose instead that one wishes to predict the birthweight for a 36- week male, a 36-week female, a 40-week male, and a 40-week female. Use the simulated data  from the posterior to construct 90\% prediction intervals for the birthweight for each type of baby, using the `HPDinterval` function in the `coda` package.
+- Compare the results you obained with those you can have from function `blinregpred`
+
+# Exercise 3: Athlete
+    
+For a given professional athlete, his or her performance level will tend to increase until midcareer and then deteriorate until retirement. Let $y_i$ denote the number of home runs hit by the professional baseball player Mike Schmidt in $n_i$ at-bats (opportunities) during the ith season. The datafile `schmidt` in `LearnBayes` package gives Schmidt's age, $y_i$, and $n_i$ for all 18 years of his baseball career. 
+
+```{r}
+?schmidt
+head(schmidt)
+```
+
+If $y_i$ is assumed to be $binomial(n_i, p_i)$, where $p_i$ denotes the probability of hitting a home run during the ith season, then a reasonable model for the ${p_i}$ is the logit quadratic model of the form:
+
+$$
+    \log \left(\frac{p_i}{1 - p_i} \right) = \beta_0 + \beta_1 AGE_i + \beta_2 AGE^2_i
+$$
+
+where $AGE_i$ is Schmidt's age during the ith session. Assume that the regression vector $\boldsymbol{\beta} = (\beta_0,\beta_1, \beta_2)^\top$ has a uniform non-informative prior.
+  
+- Write a short R function to compute the logarithm of the posterior density of $\beta$.
+- Find the laplace approximation of the posterior for $\boldsymbol{\beta}$, build an R function to compute it. 
+- Build a Metropolis-Hasting using the laplace approximation as proposal to simulate 5000 draws from the posterior distribution of $\boldsymbol{\beta}$.
+- One would expect the fitted parabola to have a concave down shape where $\beta_2 < 0$. Use the simulation output from the previous point to find the posterior probability that the fitted curve is concave down.
+
+
+# Exercise 4 (Hepatitis): a normal hierarchical model with measurement error
+  
+This example is taken from Spiegelhalter et al (1996) (chapter in Markov Chain Monte Carlo in Practice) and concerns $N=106$ children whose post-vaccination anti Hb titre was measured $2$ or $3$ times. Both measurements and times have been transformed to a log scale. One covariate $y_0$= log titre at baseline, is available. 
+
+```{r}
+df = data.frame(read.csv("hepatitis.csv"))
+head(df)
+```
+
+
+The model is essentially a random effects linear growth curve
+
+$$  
+\begin{align*}
+Y_{ij} & \sim Normal( \alpha_i + \beta_i ( t_{ij} - \bar{t}) + \gamma (y_{0i} - \bar{y}_0), \tau ) \\
+\alpha_i & \sim Normal( \alpha_0 , 1/\tau_\alpha ) \\
+\beta_i & \sim Normal( \beta_0 , 1/\tau_\beta ) \\
+\end{align*}
+$$
+
+where, $\bar{t}$ is the time mean among the observations for which the value of $Y_{ij}$ is available, $\bar{y}_0 = \sum_{i=1}^N y_{0i}/N$ and $\tau$ represents the precision (1/variance) of a normal distribution. We note the absence of a parameter representing correlation between $\alpha_i$ and $\beta_i$ unlike in Gelfand et al 1990. $\alpha_0$, $\tau_\alpha$, $\beta_0$, $\tau_\beta$, $\tau$ are given independent ``noninformative'' priors.
+
+Try to use openBUGS (see eg [www.openbugs.net/Examples/Hepatitis.html](http://www.openbugs.net/Examples/Hepatitis.html)) or JAGS (http://mcmc-jags.sourceforge.net/) and their R interfaces to
+  
+- Run the chain using the following initial values: $\alpha_0=4$, $\beta_0=0$, $\gamma=0$, $\tau_\alpha=1$, $\tau_\beta=1$ and $\tau=1$. 
+- Run a burn in of $1000$ updates followed by a futher $10000$ updates and comment on convergence diagnostics.
+- Construct a posterior confidence intervals of size $0.95$ for $\alpha_i$ and $\beta_i$ parameters using the `HPDinterval` function in the `coda` package..
+- Sample $10000$ values from the posterior predictive distribution of $Y$ for $t=(6,7,8)^\top$ and $y_0=6.5$.
+- Construct posterior predictive intervals for $Y$ of size $0.95$ for the previous case.
+
+In the previous setting we assumed that the baseline $y_{0i}$ was measured without errors. Construct a model where,
+
+$$  
+\begin{align*}
+y_{0i} & \sim Normal(\mu_{0i}, \tau) \\
+\mu_{0i} & \sim Normal(\theta, \psi)
+\end{align*}
+$$
+
+and a ``non informative'' prior for $\theta$ and $\psi$.
+
+- Redo the previous points with the new model, using initial values $\theta = 6$ and $\psi = 1$.
+
+
+  
