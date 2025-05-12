@@ -135,11 +135,14 @@ References:
   - Slice Sampling (data augmentation + Gibbs) 
      - Example: Truncated normal (slice sampling)
   - Bayesian Lasso (data augmentation + Gibbs)
-  - Mixture models (data augmentation + Gibbs)
 
 References:
 - [Owen (2013), Chp 12](https://artowen.su.domains/mc/Ch-MCMC.pdf)
 - [Park and Casella (2012), The Bayesian Lasso](https://www.tandfonline.com/doi/abs/10.1198/016214508000000337)
+
+Further references on Bayesian variable selection:
+- [Rstan tutorial](https://betanalpha.github.io/assets/case_studies/modeling_sparsity.html)
+- [Handbook of Bayesian Variable Selection (2022)](https://www.taylorfrancis.com/books/edit/10.1201/9781003089018/handbook-bayesian-variable-selection-mahlet-tadesse-marina-vannucci)
 
 ## Homeworks and Oral Exam
 
