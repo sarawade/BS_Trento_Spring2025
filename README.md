@@ -134,6 +134,9 @@ References:
 **Lecture 11: Gibbs sampling** May 6, 2025 (online, [recording](https://ed-ac-uk.zoom.us/rec/share/PdRYFWkJpOSVHNsS6VXGd9cNJIh19aDXovxPgHDZeqMHxj-O1NC-IR9jeITQYPU.roxHx28NtDrswx1o))
   - Slice Sampling (data augmentation + Gibbs) 
      - Example: Truncated normal (slice sampling)
+  - Gibbs and Metropolis Hybrids
+    - Metropolis within Gibbs
+    - Metroplized Gibbs
   - Bayesian Lasso (data augmentation + Gibbs)
 
 References:
