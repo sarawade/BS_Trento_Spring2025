@@ -1,0 +1,75 @@
+---
+title: "Homework 4 - Bayesian Statistics 2025"
+author: "Sara Wade, University of Edinburgh"  
+date: "13 May 2025"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(tidyverse)
+library(splines)
+```
+
+# Exercise 1: Bayesian Lasso
+
+In the code folder, you have been provided with an implementation of the Gibbs sampling algorithm for the Bayesian Lasso, with a demo provided in `bayes_shrink.Rmd`. Run the `gibbs_blasso` function on the prostate data, as is done on line 201 of `bayes_shrink.Rmd`.
+
+- Use additional tools from coda to check convergence. 
+- In the code, `s` is fixed. Try changing `s` and seeing how it affects the results. What is a reasonable value based on the estimated $\lambda$ from lasso?
+- Change the intialization to a random draw from the prior. How does this affect?
+- Add a step to sample $s$ based on our derivations in class.
+- Suppose $N$ is relatively large. What can be done to help reduce the computational complexity?
+
+Next, consider the package [`bayesreg`](https://rdrr.io/cran/bayesreg/man/bayesreg-package.html), which allows for a number of shrinkage priors, and uses Stan to implement a Hamiltonian Monte Carlo algorithm. Further references on shrinkage priors, see [Makalic and Schmidt  (2016)](https://arxiv.org/pdf/1611.06649) and [Polson and Scott (2010)](https://doi.org/10.1093/acprof:oso/9780199694587.003.0017).
+
+- Run the MCMC algorithm which uses HMC instead of Gibbs by calling the function `bayesreg` (see line 270 of `bayes_shrink.Rmd`), using the same number of iterations for Gibbs. 
+- How do the results compare? Consider both diagnostics of the chain and parameter estimates.
+
+# Exercise 2: Bike rentals
+
+Let's consider again the bike rental data contained in `day.csv`.
+
+```{r}
+bike = read.csv('day.csv')
+```
+
+Start by doing some intial data cleaning and preprocessing.
+
+```{r}
+# Create variable for the day of the year
+bike$day= as.numeric(as.Date(bike$dteday))  - as.numeric(as.Date("2011-01-01")) +1
+
+# Create a function to rescale variables 
+normalize <- function(x) {
+  return((x- mean(x)) /(sd(x)))
+}
+```
+
+- Perform some initial data processing by:
+  - Draw a pairs plot using `ggpairs` for all variables except the first two and `causal` and `registered`.
+  - Create a new variable `difftemp` that is the difference between `atemp` and `temp` 
+  - Encode the categorical variables `season`, `mnth`, `holiday`, `weekday`, `workingday`, `weathersit` as factors using `as.factor`.
+  - Split the data into two dataframes, one containing data for 2011 and the other for 2012
+  - For both datasets, rescale the variables `temp`, `difftemp`, `hum`, `windspeed` using the function normalize.
+  - Finally, to capture the nonlinear behavior of bike rentals over the year, create new variables using a spline basis function expansion of the day of year using the function `ns` in the `splines` package (see example in the following code). 
+```{r, eval=FALSE}
+# If your 2011 data is stored in the data frame bike2011
+bike2011$day = (bike2011$day)/365 # rescale day
+basis2011= ns(bike2011$day,6) # spline expansion using 5 knots (you may consider more or less)
+bike2011 = data.frame(bike2011, BS=basis2011) # add to data frame
+```
+
+- Next, fit a linear model to both datasets (the following code may be useful to specify the formula of the model)
+```{r}
+xnames = c(paste("BS", 1:6, sep="."),"difftemp","temp","hum","windspeed", "weekday","season","mnth","holiday","weathersit")
+fmla = reformulate(xnames, "cnt")
+print(fmla)
+```
+
+- Now, fit a Bayesian regression model using `bayesreg` for both the lasso and another choice of shrinkage prior.
+ - Check the convergence of the chains.
+ - Compute the posterior means and CIs for all coefficients and plot to compare with least squares estimates. 
+ - Using the 95% CI criterion, which variables are selected to be relevant for predicting the number of bike rentals? How does this compare across years?
+ - Lastly, using the model fitted from the 2011 data to predict bike rentals for 2012. How well is able to predict?
