@@ -154,7 +154,7 @@ A set of homeworks will be released. You will be required to submit all homework
 - [Homework 1](https://htmlpreview.github.io/?https://github.com/sarawade/BS_Trento_Spring2025/blob/main/homeworks/hw1.html): Released April 16, 2025.
 - [Homework 2](https://htmlpreview.github.io/?https://github.com/sarawade/BS_Trento_Spring2025/blob/main/homeworks/hw2.html): Released April 18, 2025.
 - [Homework 3](https://htmlpreview.github.io/?https://github.com/sarawade/BS_Trento_Spring2025/blob/main/homeworks/hw3.html): Released May 12, 2025.
-- Homework 4: TBA
+- [Homework 4](https://htmlpreview.github.io/?https://github.com/sarawade/BS_Trento_Spring2025/blob/main/homeworks/hw4.html): Released May 14, 2025.
 
 **EXAM Dates**
 June 17,2025
