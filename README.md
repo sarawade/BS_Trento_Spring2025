@@ -160,3 +160,5 @@ A set of homeworks will be released. You will be required to submit all homework
 June 17,2025
 July 21, 2025
 August 25, 2025
+
+You may submit the homeworks later (at least two weeks before the exam) if you are planning on one of the later exam dates.
